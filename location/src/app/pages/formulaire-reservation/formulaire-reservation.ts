@@ -45,6 +45,7 @@ export class FormulaireReservation {
       //champs est une date
       required(path.start, { message: "L'heure de début est obligatoire." });
       required(path.end, { message: "L'heure de fin est obligatoire." });
+      required(path.attendees, { message: 'Le nombre de participant est obligatoire.' });
       //ajouter start>end
     },
     {
