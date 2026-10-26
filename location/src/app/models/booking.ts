@@ -3,7 +3,8 @@ export interface Booking {
   roomId: number;
   title: string;
   organizer: string;
-  startDate: Date;
-  endDate: Date;
+  date: string;
+  start: string;
+  end: string;
   attendees: number;
 }
