@@ -10,7 +10,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./location
+        working-directory: ../../location
 
     steps:
       - name: Récupérer le code
