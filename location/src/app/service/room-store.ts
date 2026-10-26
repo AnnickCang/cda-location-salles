@@ -1,52 +1,38 @@
-import { Service, signal } from '@angular/core';
+import { Service, inject, signal } from '@angular/core';
+import { RoomApi } from '../core/room-api';
 import { Room } from '../models/room';
+
 @Service()
 export class RoomStore {
-  private readonly roomsSignal = signal<Room[]>([
-    {
-      id: 1,
-      name: 'Confluence',
-      floor: 0,
-      capacity: 12,
-      equipment: ['videoprojecteur', 'visio', 'tableau-blanc'],
-      accessible: true,
-    },
-    {
-      id: 2,
-      name: 'Fourvière',
-      floor: 1,
-      capacity: 6,
-      equipment: ['ecran', 'visio'],
-      accessible: true,
-    },
-    {
-      id: 3,
-      name: 'Croix-Rousse',
-      floor: 1,
-      capacity: 4,
-      equipment: ['tableau-blanc'],
-      accessible: false,
-    },
-    {
-      id: 4,
-      name: 'Bellecour',
-      floor: 2,
-      capacity: 30,
-      equipment: ['videoprojecteur', 'sonorisation', 'visio'],
-      accessible: true,
-    },
-    {
-      id: 5,
-      name: 'Part-Dieu',
-      floor: 2,
-      capacity: 8,
-      equipment: ['ecran', 'tableau-blanc'],
-      accessible: true,
-    },
-    { id: 6, name: 'Gerland', floor: 3, capacity: 2, equipment: ['ecran'], accessible: false },
-  ]);
-  readonly rooms = this.roomsSignal.asReadonly();
-  get(id: number): Room | undefined {
+  private readonly api = inject(RoomApi);
+
+  private readonly _rooms = signal<Room[]>([]);
+  readonly rooms = this._rooms.asReadonly();
+
+  private readonly _loading = signal(false);
+  readonly loading = this._loading.asReadonly();
+
+  private readonly _error = signal<string | null>(null);
+  readonly error = this._error.asReadonly();
+
+  // fonction chargement de l'API
+
+  loadRooms(): void {
+    this._loading.set(true);
+    this._error.set(null);
+
+    this.api.getRooms().subscribe({
+      next: (rooms) => {
+        this._rooms.set(rooms);
+        this._loading.set(false);
+      },
+      error: () => {
+        this._error.set('Impossible de charger les salles.');
+        this._loading.set(false);
+      },
+    });
+     get(id: number): Room | undefined {
     return this.rooms().find((room) => room.id === id);
+  }
   }
 }
