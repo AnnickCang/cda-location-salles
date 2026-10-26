@@ -14,10 +14,10 @@
    ========================================================================== */
 
 :root {
-  --color-primary: #c28068;
-  --color-primary-hover: #9f5a41;
-  --color-primary-soft: #fdeae4;
-  --color-focus: #9f5a41;
+  --color-primary: #367d72;
+  --color-primary-hover: #286459;
+  --color-primary-soft: #e5f3ef;
+  --color-focus: #286459;
   --font-sans: 'Inter', system-ui, sans-serif;
   --radius: 4px;
 }

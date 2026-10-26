@@ -24,6 +24,11 @@ export class RoomStore {
     this.api.getRooms().subscribe({
       next: (rooms) => {
         this._rooms.set(rooms);
+        this._loading.set(false);
+      },
+      error: () => {
+        this._error.set('Impossible de charger les salles.');
+        this._loading.set(false);
       },
     });
   }
