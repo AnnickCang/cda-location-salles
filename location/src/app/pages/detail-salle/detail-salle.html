@@ -1,5 +1,11 @@
-<!--<h1>Salle {{ roomSelected.name }}</h1>
+@let selectedRoom = selectedRoom$ | async;
 
-<app-info-salle [room]="roomSelected" />
--->
+@if (!selectedRoom) {
+  <h1>Salle introuvable</h1>
+} @else {
+  <h1>Salle {{ selectedRoom?.name }}</h1>
+
+  <app-info-salle [room]="selectedRoom" />
+}
+
 <app-liste-resa-salle />

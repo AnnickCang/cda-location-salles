@@ -12,8 +12,8 @@ export class RoomApi {
   }
 
   // Récupération des informations d'une salle
-  getInfoSalle(id: number): Observable<Room[]> {
-    return this.http.get<Room[]>(`/api/rooms/${id}`);
+  getInfoSalle(id: number): Observable<Room> {
+    return this.http.get<Room>(`/api/rooms/${id}`);
   }
 
   // Récupération des réservations
