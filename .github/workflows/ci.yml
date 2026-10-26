@@ -5,8 +5,12 @@ on:
   pull_request:
 
 jobs:
-  quality:
+  frontend:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./location
 
     steps:
       - name: Récupérer le code
@@ -17,6 +21,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: location/package-lock.json
 
       - name: Installer les dépendances
         run: npm ci
