@@ -94,6 +94,7 @@ export class BookingStore {
       attendees: 6,
     },
   ]);
+
   readonly bookings = this.BookingSignal.asReadonly();
 
   // Prochain identifiant libre
@@ -102,5 +103,10 @@ export class BookingStore {
   add(booking: Omit<Booking, 'id'>): void {
     const newbooking: Booking = { ...booking, id: this.nextId++ };
     this.BookingSignal.update((list) => [...list, newbooking]);
+  }
+  //
+  disponibility(roomId: number, date: string, start: string, end: string): boolean {
+    console.log(roomId, date, start, end);
+    return true;
   }
 }

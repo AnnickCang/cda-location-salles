@@ -20,4 +20,9 @@ export class RoomApi {
   getBookings(): Observable<Booking[]> {
     return this.http.get<Booking[]>('/api/bookings');
   }
+
+  // récupération des réservations d'une salle
+  getBookingsOfRoom(id: number): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`/api/rooms/${id}?_embed=bookings`);
+  }
 }

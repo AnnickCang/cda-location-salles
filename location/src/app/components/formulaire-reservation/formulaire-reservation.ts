@@ -1,14 +1,20 @@
 import { Component, inject, input, signal } from '@angular/core';
-import { Booking } from '../../models/booking';
 import { FormField, FormRoot, form, minLength, required } from '@angular/forms/signals';
-import { RoomApi } from '../../core/room-api';
 import { BookingStore } from '../../service/booking-store';
 import { Router } from '@angular/router';
 import { Room } from '../../models/room';
 
-const EMPTY_DRAFT: Booking = {
-  id: 0,
-  roomId: 0,
+//definition contenu formulaire
+export interface DraftBooking {
+  title: string;
+  organizer: string;
+  date: string;
+  start: string;
+  end: string;
+  attendees: number;
+}
+
+const EMPTY_DRAFT: DraftBooking = {
   title: '',
   organizer: '',
   date: '',
@@ -24,12 +30,13 @@ const EMPTY_DRAFT: Booking = {
   templateUrl: './formulaire-reservation.html',
 })
 export class FormulaireReservation {
+  //information salle selectionné
   readonly lsalle = input.required<Room>();
   readonly roomBooking = inject(BookingStore);
   protected readonly submitAttempted = signal(false);
-  private readonly roomApi = inject(RoomApi);
 
-  private readonly draft = signal<Booking>({ ...EMPTY_DRAFT });
+  private readonly draft = signal<DraftBooking>({ ...EMPTY_DRAFT });
+
   protected readonly bookingForm = form(
     //chargement données
 
@@ -58,8 +65,8 @@ export class FormulaireReservation {
   }
   private readonly router = inject(Router);
   private async save(): Promise<void> {
-    this.roomBooking.add(this.draft());
+    this.roomBooking.add({ ...this.draft(), roomId: this.lsalle().id });
     this.resetForm();
-    await this.router.navigate(['/equipe']);
+    await this.router.navigate(['salles/${lsalle.id']); // ajout id salle
   }
 }
