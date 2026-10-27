@@ -8,6 +8,7 @@ export class RoomApi {
   private readonly http = inject(HttpClient);
   //Post Booking
   postBooking(data: Booking): Observable<void> {
+    console.log('post');
     return this.http.post<void>('/api/bookings', data);
   }
 

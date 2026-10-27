@@ -117,11 +117,13 @@ export class BookingStore {
         newId = el.id;
       }
     }
-    return newId;
+    console.log('newId=' + newId);
+    return newId + 1;
   }
   //attribution id
   add(booking: Omit<Booking, 'id'>): void {
     const newbooking: Booking = { ...booking, id: this.getIdBooking() };
+    console.log('add lancé');
     this.BookingSignal.update((list) => [...list, newbooking]);
   }
   //
