@@ -1,10 +1,10 @@
 import { Component, inject, input } from '@angular/core';
-import { InfoSalle } from '../../components/info-salle/info-salle';
+//import { InfoSalle } from '../../components/info-salle/info-salle';
 import { ListeResaSalle } from '../../components/liste-resa-salle/liste-resa-salle';
 import { RoomApi } from '../../core/room-api';
 
 @Component({
-  imports: [InfoSalle, ListeResaSalle],
+  imports: [ListeResaSalle],
   selector: 'app-detail-salle',
   styleUrl: './detail-salle.css',
   templateUrl: './detail-salle.html',

@@ -8,6 +8,7 @@ export class RoomApi {
   private readonly http = inject(HttpClient);
   //Post Booking
   postBooking(data: Booking): Observable<void> {
+    console.log('post');
     return this.http.post<void>('/api/bookings', data);
   }
 
@@ -22,5 +23,10 @@ export class RoomApi {
   // Récupération des réservations
   getBookings(): Observable<Booking[]> {
     return this.http.get<Booking[]>('/api/bookings');
+  }
+
+  // récupération des réservations d'une salle
+  getBookingsOfRoom(id: number): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`/api/rooms/${id}?_embed=bookings`);
   }
 }
