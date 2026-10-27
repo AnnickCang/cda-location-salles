@@ -1,9 +1,9 @@
 import { Component, computed, input, inject } from '@angular/core';
-//import { FormulaireReservation } from '../../components/formulaire-reservation/formulaire-reservation';
+import { FormulaireReservation } from '../../components/formulaire-reservation/formulaire-reservation';
 import { RoomStore } from '../../service/room-store';
 
 @Component({
-  imports: [], //FormulaireReservation
+  imports: [FormulaireReservation], 
   selector: 'app-page-reservation',
   styleUrl: './page-reservation.css',
   templateUrl: './page-reservation.html',

@@ -1,1 +1,6 @@
-<p>Work? {{ id() }}</p>
+@if (psalle() === undefined) {
+  <p>Salle introuvable</p>
+} @else {
+  <app-formulaire-reservation [idSalle]="id()"></app-formulaire-reservation>
+}
+<!---->
