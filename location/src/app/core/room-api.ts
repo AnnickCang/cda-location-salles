@@ -12,6 +12,9 @@ export class RoomApi {
     return this.http.post<void>('/api/bookings', data);
   }
 
+  // GET rooms
+  getRooms(): Observable<Room[]> {
+    return this.http.get<Room[]>('/api/rooms');
   // Récupération des informations d'une salle
   getInfoSalle(id: number): Observable<Room[]> {
     return this.http.get<Room[]>(`/api/rooms/${id}`);

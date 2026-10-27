@@ -1,0 +1,8 @@
+<section class="card">
+  <h2 class="card__title">{{ room().name }}</h2>
+  <p>Étage : {{ room().floor }}</p>
+  <p>Capacité : {{ room().capacity }}</p>
+  <p class="footer">Accessible PMR ? {{ room().accessible ? 'Oui' : 'Non' }}</p>
+  <br />
+  <button class="btn btn--primary">Voir plus de détail</button>
+</section>
