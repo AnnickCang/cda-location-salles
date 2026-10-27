@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormulaireReservation } from '../formulaire-reservation/formulaire-reservation';
+import { FormulaireReservation } from '../../components/formulaire-reservation/formulaire-reservation';
 
 @Component({
   imports: [FormulaireReservation],

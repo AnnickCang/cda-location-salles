@@ -1,10 +1,10 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { Booking } from '../../models/booking';
 import { FormField, FormRoot, form, minLength, required } from '@angular/forms/signals';
 import { RoomApi } from '../../core/room-api';
-import { RoomStore } from '../../service/room-store';
 import { BookingStore } from '../../service/booking-store';
 import { Router } from '@angular/router';
+import { Room } from '../../models/room';
 
 const EMPTY_DRAFT: Booking = {
   id: 0,
@@ -24,9 +24,7 @@ const EMPTY_DRAFT: Booking = {
   templateUrl: './formulaire-reservation.html',
 })
 export class FormulaireReservation {
-  readonly roomId = input.required<number>();
-  readonly roomStore = inject(RoomStore);
-  readonly lsalle = computed(() => this.roomStore.get(Number(this.roomId())));
+  readonly lsalle = input.required<Room>();
   readonly roomBooking = inject(BookingStore);
   protected readonly submitAttempted = signal(false);
   private readonly roomApi = inject(RoomApi);

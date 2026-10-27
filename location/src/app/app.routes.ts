@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { FormulaireReservation } from './pages/formulaire-reservation/formulaire-reservation';
+import { FormulaireReservation } from './components/formulaire-reservation/formulaire-reservation';
 import { Test } from './pages/test/test';
 
 export const routes: Routes = [
@@ -15,4 +15,5 @@ export const routes: Routes = [
     title: 'Page de test',
     component: Test,
   },
+  { path: '**', redirectTo: '' },
 ];
