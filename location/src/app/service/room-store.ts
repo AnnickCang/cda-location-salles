@@ -31,8 +31,8 @@ export class RoomStore {
         this._loading.set(false);
       },
     });
-     get(id: number): Room | undefined {
-    return this.rooms().find((room) => room.id === id);
   }
+  get(id: number): Room | undefined {
+    return this.rooms().find((room) => room.id === id);
   }
 }
