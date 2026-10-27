@@ -2,7 +2,6 @@ import { Component, inject, input, signal } from '@angular/core';
 import { FormField, FormRoot, form, minLength, required } from '@angular/forms/signals';
 import { BookingStore } from '../../service/booking-store';
 import { Router } from '@angular/router';
-import { Room } from '../../models/room';
 
 //definition contenu formulaire
 export interface DraftBooking {
@@ -31,7 +30,9 @@ const EMPTY_DRAFT: DraftBooking = {
 })
 export class FormulaireReservation {
   //information salle selectionné
-  readonly lsalle = input.required<Room>();
+
+  readonly idSalle = input.required<number>();
+
   readonly roomBooking = inject(BookingStore);
   protected readonly submitAttempted = signal(false);
 
@@ -65,7 +66,7 @@ export class FormulaireReservation {
   }
   private readonly router = inject(Router);
   private async save(): Promise<void> {
-    this.roomBooking.add({ ...this.draft(), roomId: this.lsalle().id });
+    this.roomBooking.add({ ...this.draft(), roomId: this.idSalle() });
     this.resetForm();
     await this.router.navigate(['salles/${lsalle.id']); // ajout id salle
   }

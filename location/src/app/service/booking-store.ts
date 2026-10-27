@@ -1,5 +1,7 @@
-import { Service, signal } from '@angular/core';
+import { inject, Service, signal } from '@angular/core';
 import { Booking } from '../models/booking';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { RoomApi } from '../core/room-api';
 @Service()
 export class BookingStore {
   private readonly BookingSignal = signal<Booking[]>([
@@ -95,13 +97,31 @@ export class BookingStore {
     },
   ]);
 
-  readonly bookings = this.BookingSignal.asReadonly();
+  //readonly bookings = this.BookingSignal.asReadonly();
+  private readonly BookingApi = inject(RoomApi);
 
+  // Vide au départ, remplie quand la réponse arrive.
+  //protected readonly Bookings = signal<Booking[]>([]);
+
+  //constructor() {
+  // subscribe : la requête part maintenant. Le callback reçoit la réponse.
+  //this.BookingApi.getBookings().subscribe((booking) => this.Bookings.set(booking));
+  //}
+  readonly bookings = toSignal(this.BookingApi.getBookings(), { initialValue: [] });
   // Prochain identifiant libre
-  private nextId = 10;
+  getIdBooking(): number {
+    let newId = 0;
+
+    for (const el of this.bookings()) {
+      if (el.id > newId) {
+        newId = el.id;
+      }
+    }
+    return newId;
+  }
   //attribution id
   add(booking: Omit<Booking, 'id'>): void {
-    const newbooking: Booking = { ...booking, id: this.nextId++ };
+    const newbooking: Booking = { ...booking, id: this.getIdBooking() };
     this.BookingSignal.update((list) => [...list, newbooking]);
   }
   //
