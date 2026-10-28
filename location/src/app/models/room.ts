@@ -7,4 +7,5 @@ export interface Room {
   capacity: number;
   equipment: Equipment[];
   accessible: boolean;
+  image: string;
 }

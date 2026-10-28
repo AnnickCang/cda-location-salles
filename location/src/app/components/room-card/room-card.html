@@ -1,8 +1,33 @@
-<section class="card">
-  <h2 class="card__title">{{ room().name }}</h2>
-  <p>Étage : {{ room().floor }}</p>
-  <p>Capacité : {{ room().capacity }}</p>
-  <p class="footer">Accessible PMR ? {{ room().accessible ? 'Oui' : 'Non' }}</p>
-  <br />
-  <button class="btn btn--primary">Voir plus de détail</button>
+<section class="card-salle" [attr.aria-labelledby]="'room-' + room().id">
+  <div class="left-col">
+    <img class="img" [src]="room().image" [alt]="'Salle ' + room().name" />
+  </div>
+
+  <div class="right-col">
+    <div class="accessible">
+      @if (room().accessible) {
+        <div class="acces-div">
+          <img src="/accessible.png" class="picto" alt="" />
+          <p>Accessible PMR</p>
+        </div>
+      }
+    </div>
+
+    <div class="text">
+      <h2 class="card__title" [id]="'room-' + room().id">
+        {{ room().name }}
+      </h2>
+
+      <p class="floor">Se trouve à l'étage : {{ room().floor }}</p>
+
+      <p>
+        Peut accueillir <span class="bold">{{ room().capacity }} personnes</span>
+      </p>
+    </div>
+
+    <a class="button" [routerLink]="['/salles', room().id]">
+      Plus de détails
+      <span class="sr-only">sur la salle {{ room().name }}</span>
+    </a>
+  </div>
 </section>

@@ -1,7 +1,12 @@
-<h1>Toutes nos salles</h1>
-<section class="room-container">
+<h1 class="title" id="rooms-title">Toutes nos salles</h1>
+
+<section
+  class="room-container"
+  aria-labelledby="rooms-title"
+  [attr.aria-busy]="roomStore.loading()"
+>
   @if (roomStore.loading()) {
-    <p>Chargement des données</p>
+    <p role="status">Chargement des salles...</p>
   } @else if (roomStore.error()) {
     <p role="alert">{{ roomStore.error() }}</p>
   } @else {
