@@ -1,5 +1,34 @@
-<!--<h1>Salle {{ roomSelected.name }}</h1>
+<a routerLink="/" class="retour"> &lt; Retour à la liste</a>
+@if (room(); as salle) {
+  <div class="card-detail">
+    <div class="container-img">
+      <img class="img" [src]="salle.image" [alt]="'Salle ' + salle.name" />
+    </div>
 
-<app-info-salle [room]="roomSelected" />
--->
-<app-liste-resa-salle />
+    <h1>Salle {{ salle.name }}</h1>
+
+    <div class="content">
+      <div class="right-col">
+        <p>
+          Peut accueillir <span class="bold">{{ salle.capacity }} personnes</span>
+        </p>
+        <p class="floor">Se trouve à l'étage : {{ salle.floor }}</p>
+      </div>
+      <div class="left-col">
+        <ul class="equipment">
+          <p>Équipements à disposition :</p>
+          @for (i of salle.equipment; track i) {
+            <li>{{ equipmentLabels[i] ?? i }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <a class="button" [routerLink]="['/salles/reserver', salle.id]">
+      Réserver cette salle
+      <span class="sr-only"> {{ salle.name }}</span>
+    </a>
+  </div>
+} @else {
+  <p>Aucune salle trouvée.</p>
+}
