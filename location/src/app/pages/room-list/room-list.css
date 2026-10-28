@@ -6,3 +6,10 @@
   align-items: center;
   justify-content: center;
 }
+
+.title {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #424242;
+  font-size: 1.2rem;
+}

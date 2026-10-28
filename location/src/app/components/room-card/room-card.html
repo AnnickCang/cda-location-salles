@@ -1,5 +1,6 @@
 <section class="card">
   <h2 class="card__title">{{ room().name }}</h2>
+  <img [src]="room().image" [alt]="'Salle ' + room().name" />
   <p>Étage : {{ room().floor }}</p>
   <p>Capacité : {{ room().capacity }}</p>
   <p class="footer">Accessible PMR ? {{ room().accessible ? 'Oui' : 'Non' }}</p>
