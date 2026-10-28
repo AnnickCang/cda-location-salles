@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, input, signal, numberAttribute } from '@angular/core';
 import { FormField, FormRoot, form, minLength, required, validate } from '@angular/forms/signals';
 import { BookingStore } from '../../service/booking-store';
 import { Router } from '@angular/router';
@@ -31,7 +31,9 @@ const EMPTY_DRAFT: DraftBooking = {
 export class FormulaireReservation {
   //information salle selectionné
 
-  readonly idSalle = input.required<number>();
+  readonly idSalle = input.required<number, string>({
+    transform: numberAttribute,
+  });
 
   readonly roomBooking = inject(BookingStore);
   protected readonly submitAttempted = signal(false);

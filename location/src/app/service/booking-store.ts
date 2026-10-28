@@ -37,9 +37,10 @@ export class BookingStore {
     }
     const hasConflict = this.bookings().some(
       (booking) =>
-        booking.roomId === roomId &&
+        roomId === booking.roomId &&
         booking.date === date &&
-        (start < booking.end || end > booking.start),
+        start < booking.end &&
+        end > booking.start,
     );
     return hasConflict
       ? { kind: 'unavailable', message: "La salle n'est pas disponible sur ce créneau." }
