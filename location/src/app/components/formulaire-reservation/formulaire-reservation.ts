@@ -1,5 +1,5 @@
 import { Component, inject, input, signal } from '@angular/core';
-import { FormField, FormRoot, form, minLength, required } from '@angular/forms/signals';
+import { FormField, FormRoot, form, minLength, required, validate } from '@angular/forms/signals';
 import { BookingStore } from '../../service/booking-store';
 import { Router } from '@angular/router';
 
@@ -52,6 +52,14 @@ export class FormulaireReservation {
       required(path.start, { message: "L'heure de début est obligatoire." });
       required(path.end, { message: "L'heure de fin est obligatoire." });
       required(path.attendees, { message: 'Le nombre de participant est obligatoire.' });
+      validate(path.start, ({ valueOf }) =>
+        this.roomBooking.disponibility(
+          this.idSalle(),
+          valueOf(path.date),
+          valueOf(path.start),
+          valueOf(path.end),
+        ),
+      );
       //ajouter start>end
     },
     {
@@ -66,8 +74,10 @@ export class FormulaireReservation {
   }
   private readonly router = inject(Router);
   private async save(): Promise<void> {
-    this.roomBooking.add({ ...this.draft(), roomId: this.idSalle() });
+    console.log('save activé');
+    await this.roomBooking.add({ ...this.draft(), roomId: this.idSalle() });
     this.resetForm();
-    await this.router.navigate(['salles/${lsalle.id']); // ajout id salle
+    console.log('fin save');
+    await this.router.navigate([`salles/${this.idSalle()}`]);
   }
 }
