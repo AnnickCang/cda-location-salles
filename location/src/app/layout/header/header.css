@@ -1,0 +1,35 @@
+.header {
+  box-sizing: border-box;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem;
+  margin: 1rem;
+  position: fixed;
+  width: 90%;
+  border-radius: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(36px);
+  -webkit-backdrop-filter: blur(36px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 10px 5px rgba(255, 255, 255, 0.5);
+}
+
+.brand {
+  font-weight: 500;
+}
+.bold {
+  font-weight: 700;
+}
+
+.logo {
+  width: 24px;
+}
