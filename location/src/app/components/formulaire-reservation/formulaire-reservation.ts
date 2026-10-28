@@ -66,8 +66,10 @@ export class FormulaireReservation {
   }
   private readonly router = inject(Router);
   private async save(): Promise<void> {
-    this.roomBooking.add({ ...this.draft(), roomId: this.idSalle() });
+    console.log('save activé');
+    await this.roomBooking.add({ ...this.draft(), roomId: this.idSalle() });
     this.resetForm();
-    await this.router.navigate(['salles/${lsalle.id']); // ajout id salle
+    console.log('fin save');
+    await this.router.navigate([`salles/${this.idSalle()}`]); 
   }
 }
